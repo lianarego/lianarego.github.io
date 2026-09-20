@@ -66,6 +66,27 @@
   .cs-nav a:hover { color: var(--ink); }
   @media (max-width: 720px) { .cs-nav { gap: 15px; } .cs-nav a { font-size: 12px; letter-spacing: 0.07em; } }
 
+  /* mobile hamburger, matching the rest of the site */
+  .cs-burger { display:none; width:40px; height:40px; border:none; background:transparent;
+    cursor:pointer; padding:9px 8px; flex-direction:column; justify-content:space-between; }
+  .cs-burger span { display:block; height:2px; width:100%; background:#7A6038; border-radius:2px;
+    transition: transform .28s ease, opacity .2s ease; }
+  .cs-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .cs-burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  .cs-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 809px) {
+    .topbar { position: sticky; }
+    .cs-burger { display:flex; }
+    .cs-nav { position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:0;
+      background: rgba(244,242,237,0.97);
+      border-bottom:1px solid var(--rule); box-shadow:0 12px 26px rgba(60,45,20,0.12);
+      max-height:0; overflow:hidden; transition:max-height .32s ease; }
+    .cs-nav.open { max-height:200px; }
+    .cs-nav a { padding:15px 24px; font-size:14px; letter-spacing:0.12em;
+      border-top:1px solid var(--rule); }
+  }
+
+
 
   /* ============ layout ============ */
   /* Text sits on the same left rail as the figures: the container is the wide
@@ -816,7 +837,11 @@
 
 <header class="topbar">
   <a class="brand" href="index.html">Liana Rego</a>
-  <nav class="cs-nav" aria-label="Primary">
+  <button class="cs-burger" id="csBurger" type="button" aria-label="Open menu"
+          aria-expanded="false" aria-controls="csNav">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="cs-nav" id="csNav" aria-label="Primary">
     <a href="index.html#shelf">Work</a>
     <a href="about.html">About</a>
   </nav>
@@ -1465,5 +1490,20 @@
   })();
 </script>
 
+<script>
+  (function(){
+    var burger=document.getElementById('csBurger'), links=document.getElementById('csNav');
+    if(!burger||!links) return;
+    burger.addEventListener('click', function(){
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    links.addEventListener('click', function(e){
+      if(e.target.tagName==='A'){ links.classList.remove('open');
+        burger.setAttribute('aria-expanded','false'); burger.setAttribute('aria-label','Open menu'); }
+    });
+  })();
+</script>
 </body>
 </html>
