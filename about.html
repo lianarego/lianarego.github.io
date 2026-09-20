@@ -1842,7 +1842,7 @@ body { min-height:100vh; display:flex; flex-direction:column; }
 .site-foot { margin-top:auto; }
 .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-.site-nav { position: sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:space-between; height:64px; padding:0 clamp(20px,4vw,48px); padding-right:clamp(88px,8vw,124px); background:color-mix(in srgb, var(--cream) 82%, transparent); -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px); border-bottom:1px solid var(--rule-soft); flex:0 0 auto; }
+.site-nav { position: sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:space-between; height:64px; padding:0 34px; background:color-mix(in srgb, var(--cream) 82%, transparent); -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px); border-bottom:1px solid var(--rule-soft); flex:0 0 auto; }
 .site-nav .brand { font-family:'Fraunces','Playfair Display',Georgia,serif; font-weight:600; font-size:22px; letter-spacing:0.01em; color:var(--ink); text-decoration:none; }
 .nav-links { display:flex; gap:clamp(16px,2.4vw,34px); }
 .nav-links a { font-family:'IM Fell English SC',serif; font-size:14px; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft); text-decoration:none; cursor:pointer; }
@@ -1976,7 +1976,7 @@ html[data-theme="dark"] .book-shot img { filter:saturate(3.4) contrast(1.16) bri
 .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
 .nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 809px) {
-  .site-nav { padding-right: clamp(20px,4vw,48px); }
+  .site-nav { padding: 0 20px; }
   .nav-burger { display:flex; }
   .nav-links { position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:0;
     background: color-mix(in srgb, var(--cream) 97%, transparent);
@@ -1987,6 +1987,14 @@ html[data-theme="dark"] .book-shot img { filter:saturate(3.4) contrast(1.16) bri
                  border-top:1px solid var(--rule-soft); }
   /* hero text reads left, not centered */
   .hero-content { text-align:left !important; }
+  /* no scroll cue on mobile; the case studies follow straight after the hero */
+  .scroll-indicator { display:none !important; }
+  #hero { min-height:auto !important; padding-bottom:12px !important; }
+  .hero-center { flex:0 0 auto !important; }
+  /* flex-basis is a HEIGHT once the hero stacks, so release it on mobile */
+  .hero-content { flex:0 0 auto !important; }
+  .hero-figure  { flex:0 0 auto !important; }
+  #shelf { padding-top:18px !important; }
   /* tighter gap under Selected Works */
   .shelf-books { margin-top:14px !important; padding-top:0 !important; gap:30px !important; }
   #shelf { padding-top:36px !important; padding-left:14px !important; padding-right:14px !important; }
@@ -2071,7 +2079,7 @@ html[data-theme="dark"] .book-shot img { filter:saturate(3.4) contrast(1.16) bri
       <p class="hero-body">Currently designing multibillion-dollar ecommerce platforms, internal tools, and data-heavy dashboards at a Fortune&nbsp;10 healthcare company.</p>
     </div>
     <div class="hero-figure">
-      <img class="hero-illo" src="liana-hero.png" width="880" height="1320" alt="Illustration of Liana, smiling and waving" />
+      <img class="hero-illo" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="880" height="1320" alt="Illustration of Liana, smiling and waving" />
     </div>
   </div>
   <div class="scroll-indicator" id="scrollIndicator" onclick="goToWork()">
