@@ -786,35 +786,32 @@
 <!-- ===================== end analytics ===================== -->
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  /* ===== Restyled password gate (2026) — matches the home hero ===== */
-  body.gated #pw {
-    background: #15131F !important;
-    display: flex !important; align-items: center !important; justify-content: center !important; padding: 24px !important;
-  }
-  #pw::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: none; }
+  /* ===== Restyled password gate (2026) — soft light ===== */
+  body.gated #pw { background: #F7F4ED !important;
+    display: flex !important; align-items: center !important; justify-content: center !important; padding: 24px !important; }
+  #pw::after { display: none !important; }
   #pw .pw-sky, #pw .pw-crest { display: none !important; }
   #pw .pw-card { position: relative; z-index: 1; width: min(440px, 100%) !important; text-align: center !important; }
   #pw .pw-left::before { content: ""; display: block; width: 40px; height: 40px; margin: 0 auto 24px;
-    background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M%2032%202%20L%2037.25%2022.91%20L%2057.98%2017%20L%2042.5%2032%20L%2057.98%2047%20L%2037.25%2041.09%20L%2032%2062%20L%2026.75%2041.09%20L%206.02%2047%20L%2021.5%2032%20L%206.02%2017%20L%2026.75%2022.91%20Z'%20fill='%23C9A96C'/%3E%3C/svg%3E") center/contain no-repeat; opacity: 0.95; }
+    background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M%2032%202%20L%2037.25%2022.91%20L%2057.98%2017%20L%2042.5%2032%20L%2057.98%2047%20L%2037.25%2041.09%20L%2032%2062%20L%2026.75%2041.09%20L%206.02%2047%20L%2021.5%2032%20L%206.02%2017%20L%2026.75%2022.91%20Z'%20fill='%23A07C4A'/%3E%3C/svg%3E") center/contain no-repeat; }
   #pw .pw-card h2 { font-family: "Quattrocento", Georgia, serif !important; font-weight: 700 !important;
-    color: #F6F1E6 !important; font-size: clamp(25px, 3.6vw, 33px) !important; line-height: 1.18 !important;
-    letter-spacing: 0 !important; margin: 0 0 12px !important; text-shadow: 0 1px 4px rgba(6,6,14,0.5) !important; }
+    color: #1F1B14 !important; font-size: clamp(25px, 3.6vw, 33px) !important; line-height: 1.18 !important;
+    letter-spacing: 0 !important; margin: 0 0 12px !important; text-shadow: none !important; }
   #pw .pw-sub { font-family: "Lora", Georgia, serif !important; font-style: italic !important;
-    color: rgba(246,241,230,0.82) !important; font-size: 15.5px !important; margin: 0 0 34px !important; }
+    color: #6B6456 !important; font-size: 15.5px !important; margin: 0 0 34px !important; }
   #pw .pw-field { display: flex !important; align-items: center !important; gap: 10px !important;
     max-width: 320px !important; margin: 0 auto !important; border: none !important;
-    border-bottom: 1px solid rgba(246,241,230,0.45) !important; padding-bottom: 8px !important; transition: border-color 0.3s ease !important; }
+    border-bottom: 1px solid rgba(31,27,20,0.28) !important; padding-bottom: 8px !important; transition: border-color 0.3s ease !important; }
   #pw .pw-field::before { display: none !important; }
-  #pw .pw-field:focus-within { border-bottom-color: #C9A96C !important; }
+  #pw .pw-field:focus-within { border-bottom-color: #A07C4A !important; }
   #pw .pw-input { flex: 1 !important; background: none !important; border: none !important; outline: none !important;
-    font-family: "Lora", Georgia, serif !important; color: #F6F1E6 !important; font-size: 15px !important;
+    font-family: "Lora", Georgia, serif !important; color: #1F1B14 !important; font-size: 15px !important;
     letter-spacing: 0.14em !important; text-transform: uppercase !important; padding: 2px 0 !important; }
-  #pw .pw-input::placeholder { color: rgba(246,241,230,0.5) !important; letter-spacing: 0.14em !important; }
-  #pw .pw-go { background: none !important; border: none !important; color: #C9A96C !important; cursor: pointer !important;
+  #pw .pw-input::placeholder { color: rgba(31,27,20,0.42) !important; letter-spacing: 0.14em !important; }
+  #pw .pw-go { background: none !important; border: none !important; color: #A07C4A !important; cursor: pointer !important;
     padding: 2px 4px !important; display: flex !important; transition: transform 0.3s ease, color 0.3s ease !important; }
-  #pw .pw-go:hover { color: #E3C68E !important; transform: translateX(3px) !important; }
-  #pw .pw-err { font-family: "Lora", Georgia, serif !important; color: #E6A6A6 !important; font-size: 13.5px !important; margin-top: 16px !important; }
+  #pw .pw-go:hover { color: #8A6A3A !important; transform: translateX(3px) !important; }
+  #pw .pw-err { font-family: "Lora", Georgia, serif !important; color: #B23B3B !important; font-size: 13.5px !important; margin-top: 16px !important; }
 </style>
 </head>
 <body class="gated">
