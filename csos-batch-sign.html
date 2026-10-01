@@ -788,11 +788,11 @@
 <style>
   /* ===== Restyled password gate (2026) — matches the home hero ===== */
   body.gated #pw {
-    background: #0b0a12 url("assets/hero-stars.jpg") center center / cover no-repeat !important;
+    background: #15131F !important;
     display: flex !important; align-items: center !important; justify-content: center !important; padding: 24px !important;
   }
   #pw::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(ellipse 66% 60% at 50% 46%, rgba(6,6,12,0.50) 0%, rgba(6,6,12,0.76) 100%); }
+    background: none; }
   #pw .pw-sky, #pw .pw-crest { display: none !important; }
   #pw .pw-card { position: relative; z-index: 1; width: min(440px, 100%) !important; text-align: center !important; }
   #pw .pw-left::before { content: ""; display: block; width: 40px; height: 40px; margin: 0 auto 24px;
@@ -829,7 +829,7 @@
   <div class="pw-card">
     <div class="pw-left">
     <h2 id="pwTitle">This case study is locked.</h2>
-      <p class="pw-sub">Whisper the word to enter.</p>
+      <p class="pw-sub">Enter password to view.</p>
     </div>
     <div class="pw-right">
       <div class="pw-field">
