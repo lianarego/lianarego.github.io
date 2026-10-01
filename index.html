@@ -114,7 +114,8 @@
   }
   .hero-bg {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: center center;
+    object-fit: cover; object-position: center top;
+    transform: scale(1.34); transform-origin: center top;
     z-index: 0;
   }
   .hero::before {
@@ -131,6 +132,7 @@
     max-width: 215px;
     padding-left: 18px;
     border-left: 1.5px solid var(--hero-rule);
+    text-shadow: 0 1px 3px rgba(6,6,14,0.55);
   }
   .hero-name {
     font-family: var(--serif); font-weight: 700; color: var(--hero-ink);
@@ -142,7 +144,7 @@
   }
 
   .scroll-cue {
-    align-self: center; margin-top: 30px; z-index: 2;
+    align-self: center; margin-top: 54px; z-index: 2;
     color: var(--hero-ink-2); display: flex; align-items: center; justify-content: center;
   }
   .scroll-cue svg { width: 28px; height: 28px; animation: bob 1.5s ease-in-out infinite; }
@@ -175,15 +177,14 @@
     font-family: var(--serif); font-weight: 700; color: var(--ink);
     font-size: clamp(24px, 2.6vw, 28px); line-height: 1.16; letter-spacing: -0.005em; margin-bottom: 16px;
   }
-  .case-desc { color: var(--ink-2); font-size: 16px; max-width: 46ch; margin-bottom: 24px; }
+  .case-desc { color: var(--ink); font-size: 16px; max-width: 46ch; margin-bottom: 24px; }
   .case-link {
     display: inline-flex; align-items: center; gap: 9px;
     font-family: var(--body); font-size: 16px; font-weight: 500; letter-spacing: 0; color: var(--ink);
-    border-bottom: 1px solid var(--rule-2); padding-bottom: 3px;
-    transition: color 0.3s ease, gap 0.3s ease, border-color 0.3s ease;
+    transition: color 0.3s ease, gap 0.3s ease;
   }
   .case-link svg { width: 18px; height: 12px; transition: transform 0.3s ease; }
-  .case-link:hover { color: var(--gold); border-color: var(--gold); gap: 13px; }
+  .case-link:hover { color: var(--gold); gap: 13px; }
   .case-link:hover svg { transform: translateX(4px); }
   .case-soon {
     display: inline-flex; align-items: center; gap: 8px;
@@ -287,7 +288,7 @@
   <!-- Case 1 — CSOS — white band, image left -->
   <section class="band band-white">
     <div class="wrap">
-      <article class="case reveal">
+      <article class="case case--flip reveal">
         <a class="case-media" href="csos-batch-sign.html" aria-label="CSOS Batch Sign case study">
           <img src="assets/cs-csos.jpg" alt="CSOS Batch Sign controlled-substance ordering screens" loading="lazy">
         </a>
@@ -307,7 +308,7 @@
   <!-- Case 2 — CEI — gray band, image right -->
   <section class="band band-gray">
     <div class="wrap">
-      <article class="case case--flip reveal">
+      <article class="case reveal">
         <a class="case-media" href="covered-entity-insights.html" aria-label="Covered Entity Insights case study">
           <img src="assets/cs-covered.png" alt="Covered Entity Insights spend-analysis dashboard across devices" loading="lazy">
         </a>
@@ -327,7 +328,7 @@
   <!-- Case 3 — CSP (placeholder) — white band, image left -->
   <section class="band band-white">
     <div class="wrap">
-      <article class="case reveal">
+      <article class="case case--flip reveal">
         <div class="case-media">
           <img src="assets/cs-placeholder.svg" alt="Placeholder — case study coming soon">
         </div>
