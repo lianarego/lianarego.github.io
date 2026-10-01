@@ -195,8 +195,9 @@
   .contact {
     position: fixed; right: clamp(16px, 3vw, 30px); bottom: 18px; z-index: 40;
     display: flex; align-items: center; gap: 12px;
-    font-family: var(--body); font-size: 14px; color: var(--hero-ink-2);
-    transition: color 0.4s ease;
+    font-family: var(--body); font-size: 14px; color: var(--ink-2);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.45s ease, color 0.3s ease;
   }
   .contact a, .contact button { color: inherit; }
   .c-email {
@@ -219,13 +220,13 @@
   .c-tip::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--ink); }
   .c-email:hover .c-tip, .c-email:focus-visible .c-tip, .c-email.copied .c-tip { opacity: 1; transform: translate(-50%, 0); }
 
-  body.scrolled .contact { color: var(--ink-2); }
+  body.scrolled .contact { opacity: 1; pointer-events: auto; color: var(--ink-2); }
   body.scrolled .c-email:hover, body.scrolled .c-li:hover { color: var(--gold); }
 
   /* ============ REVEAL ============ */
-  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2,0.7,0.2,1); }
+  .reveal { opacity: 0; transform: translateY(48px); transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.22, 1.12, 0.36, 1); }
   .reveal.in { opacity: 1; transform: none; }
-  .hero-copy.reveal { transform: translateY(26px); }
+  .hero-copy.reveal { transform: translateY(48px); }
   .hero-copy.reveal.in { transform: none; }
 
   /* ============ RESPONSIVE ============ */
