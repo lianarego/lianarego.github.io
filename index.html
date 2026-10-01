@@ -37,11 +37,12 @@
     --ink-2:     #4F483B;   /* body text */
     --ink-3:     #8A8070;   /* muted labels */
     --white:     #FFFFFF;
-    --gray:      #F2F1EC;   /* light gray band */
+    --gray:      #F1F1F2;   /* true light gray band */
     --gold:      #A07C4A;   /* favicon gold */
     --gold-2:    #C9A96C;   /* lighter gold */
     --rule:      rgba(31,27,20,0.12);
     --rule-2:    rgba(31,27,20,0.30);
+    --case-rule: rgba(31,27,20,0.24);
     --hero-ink:  #F6F1E6;
     --hero-ink-2:rgba(246,241,230,0.88);
     --hero-rule: rgba(246,241,230,0.60);
@@ -103,33 +104,39 @@
   body.scrolled .nav-links a { color: var(--ink-2); }
   body.scrolled .nav-links a:hover { color: var(--gold); }
 
-  /* ============ HERO (centered) ============ */
+  /* ============ HERO (centered, zoomed bg) ============ */
   .hero {
     position: relative; min-height: 100svh;
     display: flex; align-items: center; justify-content: center;
     padding: 90px 24px;
-    background: #0b0a12 url("assets/hero-stars.jpg") center 32% / cover no-repeat;
+    background: #0b0a12;
     overflow: hidden;
   }
+  .hero-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 34%;
+    transform: scale(1.44); transform-origin: center 34%;
+    z-index: 0;
+  }
   .hero::before {
-    content: ""; position: absolute; inset: 0;
+    content: ""; position: absolute; inset: 0; z-index: 1;
     background:
-      radial-gradient(ellipse 60% 52% at 50% 52%, rgba(6,6,12,0.58) 0%, rgba(6,6,12,0.18) 62%, rgba(6,6,12,0) 82%),
-      linear-gradient(to bottom, rgba(6,6,12,0.34) 0%, rgba(6,6,12,0.08) 34%, rgba(6,6,12,0.42) 100%);
+      radial-gradient(ellipse 58% 50% at 50% 54%, rgba(6,6,12,0.58) 0%, rgba(6,6,12,0.18) 62%, rgba(6,6,12,0) 82%),
+      linear-gradient(to bottom, rgba(6,6,12,0.34) 0%, rgba(6,6,12,0.08) 34%, rgba(6,6,12,0.40) 100%);
   }
   .hero-copy {
-    position: relative; z-index: 2;
-    max-width: 380px;
+    position: relative; z-index: 2; top: 32px;
+    max-width: 320px;
     padding-left: clamp(20px, 2vw, 28px);
     border-left: 1.5px solid var(--hero-rule);
   }
   .hero-name {
     font-family: var(--serif); font-weight: 600; color: var(--hero-ink);
-    font-size: 20px; line-height: 1.12; letter-spacing: 0.005em;
+    font-size: 24px; line-height: 1.12; letter-spacing: 0.005em;
     margin-bottom: 16px;
   }
   .hero-blurb {
-    color: var(--hero-ink-2); font-size: 16px; line-height: 1.6;
+    color: var(--hero-ink-2); font-size: 12px; line-height: 1.66; letter-spacing: 0.01em;
   }
 
   .scroll-cue {
@@ -149,8 +156,12 @@
 
   .case-media { display: block; }
   .case-media img { width: 100%; height: auto; transition: transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
-  .case-media:hover img { transform: translateY(-4px); }
+  a.case-media:hover img { transform: translateY(-4px); }
 
+  .case-body {
+    border-left: 1.5px solid var(--case-rule);
+    padding-left: clamp(22px, 2.2vw, 36px);
+  }
   .case-eyebrow {
     font-family: var(--body);
     font-size: 13px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
@@ -171,15 +182,11 @@
   .case-link svg { width: 18px; height: 12px; transition: transform 0.3s ease; }
   .case-link:hover { color: var(--gold); border-color: var(--gold); gap: 13px; }
   .case-link:hover svg { transform: translateX(4px); }
-
-  /* coming-soon strip */
-  .soon-row {
-    margin-top: clamp(64px, 8vw, 104px); padding-top: 40px; border-top: 1px solid var(--rule);
-    display: flex; align-items: center; justify-content: center; gap: 12px; text-align: center;
-    color: var(--ink-3); font-size: 16px;
+  .case-soon {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 15px; font-style: italic; color: var(--ink-3);
   }
-  .soon-row .star { color: var(--gold-2); }
-  .soon-row b { color: var(--ink-2); font-weight: 600; }
+  .case-soon::before { content: "✦"; color: var(--gold-2); font-style: normal; }
 
   /* ============ FIXED CONTACT (bottom-right) ============ */
   .contact {
@@ -196,10 +203,7 @@
   }
   .c-email:hover, .c-li:hover { color: var(--hero-ink); }
   .c-email:hover { border-bottom-color: currentColor; }
-  .c-li {
-    border-bottom: 1px solid transparent; padding-bottom: 1px;
-    transition: color 0.3s ease, border-color 0.3s ease;
-  }
+  .c-li { border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.3s ease, border-color 0.3s ease; }
   .c-li:hover { border-bottom-color: currentColor; }
   .c-sep { opacity: 0.5; }
   .c-tip {
@@ -209,10 +213,7 @@
     opacity: 0; transform: translateY(4px); pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
-  .c-tip::after {
-    content: ""; position: absolute; top: 100%; right: 14px;
-    border: 5px solid transparent; border-top-color: var(--ink);
-  }
+  .c-tip::after { content: ""; position: absolute; top: 100%; right: 14px; border: 5px solid transparent; border-top-color: var(--ink); }
   .c-email:hover .c-tip, .c-email:focus-visible .c-tip, .c-email.copied .c-tip { opacity: 1; transform: none; }
 
   body.scrolled .contact { color: var(--ink-2); }
@@ -221,13 +222,16 @@
   /* ============ REVEAL ============ */
   .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2,0.7,0.2,1); }
   .reveal.in { opacity: 1; transform: none; }
+  .hero-copy.reveal { transform: translateY(26px); }
+  .hero-copy.reveal.in { transform: none; }
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 820px) {
     body { font-size: 16px; }
-    .case { grid-template-columns: 1fr; gap: 26px; }
+    .case { grid-template-columns: 1fr; gap: 24px; }
     .case--flip .case-media { order: 0; }
     .case-media { order: -1; }
+    .case-body { border-left: none; padding-left: 0; }
   }
   @media (max-width: 540px) {
     .wrap { padding: 0 22px; }
@@ -241,7 +245,7 @@
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .scroll-cue svg { animation: none; }
-    .case-media img, .case-media:hover img { transition: none; transform: none; }
+    .case-media img, a.case-media:hover img { transition: none; transform: none; }
   }
 </style>
 </head>
@@ -258,6 +262,7 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
+  <img class="hero-bg" src="assets/hero-stars.jpg" alt="" aria-hidden="true">
   <div class="hero-copy reveal">
     <h1 class="hero-name">Liana Rego</h1>
     <p class="hero-blurb">
@@ -274,15 +279,35 @@
 <!-- ============ WORK ============ -->
 <main id="work">
 
-  <!-- Case 1 — white band, image left -->
+  <!-- Case 1 — CSOS — white band, image left -->
   <section class="band band-white">
     <div class="wrap">
       <article class="case reveal">
+        <a class="case-media" href="csos-batch-sign.html" aria-label="CSOS Batch Sign case study">
+          <img src="assets/cs-csos.jpg" alt="CSOS Batch Sign controlled-substance ordering screens" loading="lazy">
+        </a>
+        <div class="case-body">
+          <div class="case-eyebrow"><b>01</b> &nbsp;·&nbsp; Compliance &amp; workflow</div>
+          <h3 class="case-title">CSOS Batch Sign</h3>
+          <p class="case-desc">A redesign of controlled-substance order signing that lets pharmacists review and approve hundreds of carts in one secure, auditable pass — without losing sight of a single order.</p>
+          <a class="case-link" href="csos-batch-sign.html">
+            Enter password
+            <svg viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h19M15 2l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Case 2 — CEI — gray band, image right -->
+  <section class="band band-gray">
+    <div class="wrap">
+      <article class="case case--flip reveal">
         <a class="case-media" href="covered-entity-insights.html" aria-label="Covered Entity Insights case study">
           <img src="assets/cs-covered.png" alt="Covered Entity Insights spend-analysis dashboard across devices" loading="lazy">
         </a>
         <div class="case-body">
-          <div class="case-eyebrow"><b>01</b> &nbsp;·&nbsp; Healthcare analytics</div>
+          <div class="case-eyebrow"><b>02</b> &nbsp;·&nbsp; Healthcare analytics</div>
           <h3 class="case-title">Covered Entity Insights</h3>
           <p class="case-desc">A spend-analysis dashboard that gives 340B, WAC, and GPO accounts a single, trustworthy view of where every dollar goes — turning scattered pharmacy data into clear, defensible decisions.</p>
           <a class="case-link" href="covered-entity-insights.html">
@@ -294,28 +319,20 @@
     </div>
   </section>
 
-  <!-- Case 2 — light gray band, image right -->
-  <section class="band band-gray">
+  <!-- Case 3 — CSP (placeholder) — white band, image left -->
+  <section class="band band-white">
     <div class="wrap">
-      <article class="case case--flip reveal">
-        <a class="case-media" href="csos-batch-sign.html" aria-label="CSOS Batch Sign case study">
-          <img src="assets/cs-csos.jpg" alt="CSOS Batch Sign controlled-substance ordering screens" loading="lazy">
-        </a>
+      <article class="case reveal">
+        <div class="case-media">
+          <img src="assets/cs-placeholder.svg" alt="Placeholder — case study coming soon">
+        </div>
         <div class="case-body">
-          <div class="case-eyebrow"><b>02</b> &nbsp;·&nbsp; Compliance &amp; workflow</div>
-          <h3 class="case-title">CSOS Batch Sign</h3>
-          <p class="case-desc">A redesign of controlled-substance order signing that lets pharmacists review and approve hundreds of carts in one secure, auditable pass — without losing sight of a single order.</p>
-          <a class="case-link" href="csos-batch-sign.html">
-            Enter password
-            <svg viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h19M15 2l6 6-6 6"/></svg>
-          </a>
+          <div class="case-eyebrow"><b>03</b> &nbsp;·&nbsp; Dashboard redesign</div>
+          <h3 class="case-title">CSP Dashboard Redesign</h3>
+          <p class="case-desc">A ground-up rethink of the CSP dashboard — consolidating fragmented tools into one focused, decision-ready workspace.</p>
+          <span class="case-soon">Case study coming soon</span>
         </div>
       </article>
-
-      <div class="soon-row reveal">
-        <span class="star">✦</span>
-        <span>More on the way — <b>CSP Dashboard Redesign</b>, currently in progress.</span>
-      </div>
     </div>
   </section>
 
