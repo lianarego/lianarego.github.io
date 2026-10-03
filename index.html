@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Liana Rego — Product Designer">
 <meta property="og:description" content="A product designer who cares about craft — clarity, edge cases, and trust.">
-<meta property="og:image" content="https://lianarego.github.io/assets/hero-stars.jpg">
+<meta property="og:image" content="https://lianarego.github.io/assets/hero-bg.jpg">
 <meta property="og:url" content="https://lianarego.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -43,9 +43,9 @@
     --rule:      rgba(31,27,20,0.12);
     --rule-2:    rgba(31,27,20,0.30);
     --case-rule: rgba(31,27,20,0.24);
-    --hero-ink:  #F6F1E6;
-    --hero-ink-2:rgba(246,241,230,0.88);
-    --hero-rule: rgba(246,241,230,0.60);
+    --hero-ink:  #1F1B14;
+    --hero-ink-2:rgba(31,27,20,0.72);
+    --hero-rule: rgba(31,27,20,0.40);
     --maxw:      1140px;
     --serif: 'Quattrocento', Georgia, 'Times New Roman', serif;
     --body:  'Lora', Georgia, 'Times New Roman', serif;
@@ -109,7 +109,7 @@
     position: relative; min-height: 100svh;
     display: flex; align-items: center; justify-content: center;
     padding: 90px 24px;
-    background: #0b0a12;
+    background: #E7E2DA;
     overflow: hidden;
   }
   .hero-bg {
@@ -117,12 +117,7 @@
     object-fit: cover; object-position: center center;
     z-index: 0;
   }
-  .hero::before {
-    content: ""; position: absolute; inset: 0; z-index: 1;
-    background:
-      radial-gradient(ellipse 58% 50% at 50% 54%, rgba(6,6,12,0.58) 0%, rgba(6,6,12,0.18) 62%, rgba(6,6,12,0) 82%),
-      linear-gradient(to bottom, rgba(6,6,12,0.34) 0%, rgba(6,6,12,0.08) 34%, rgba(6,6,12,0.40) 100%);
-  }
+  .hero::before { display: none; }
   .hero-inner {
     position: relative; z-index: 2; top: 96px;
     display: flex; flex-direction: column; align-items: flex-start;
@@ -131,7 +126,6 @@
     max-width: 215px;
     padding-left: 18px;
     border-left: 1.5px solid var(--hero-rule);
-    text-shadow: 0 1px 3px rgba(6,6,14,0.55);
   }
   .hero-name {
     font-family: var(--serif); font-weight: 700; color: var(--hero-ink);
@@ -267,7 +261,7 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
-  <img class="hero-bg" src="assets/hero-stars.jpg" alt="" aria-hidden="true">
+  <img class="hero-bg" src="assets/hero-bg.jpg" alt="" aria-hidden="true">
   <div class="hero-inner">
     <div class="hero-copy reveal">
       <h1 class="hero-name">Liana Rego</h1>
