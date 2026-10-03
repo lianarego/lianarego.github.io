@@ -141,8 +141,8 @@
     align-self: center; margin-top: 54px; z-index: 2;
     color: var(--hero-ink-2); display: flex; align-items: center; justify-content: center;
   }
-  .scroll-cue svg { width: 28px; height: 28px; animation: bob 1.5s ease-in-out infinite; }
-  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(11px); } }
+  .scroll-cue svg { width: 28px; height: 28px; animation: scrollCue 1.5s ease infinite; }
+  @keyframes scrollCue { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(28px); opacity: 0; } }
 
   /* ============ CASE BANDS ============ */
   .band { min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: 96px 0; }
