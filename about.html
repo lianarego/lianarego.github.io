@@ -97,20 +97,23 @@
   body.scrolled .nav-links a { color: var(--ink-2); }
   body.scrolled .nav-links a:hover, body.scrolled .nav-links a.is-active { color: var(--gold); }
 
-  /* ============ HEADER ============ */
-  .head {
-    position: relative; min-height: 62vh; display: flex; align-items: center;
-    padding: 150px 0 90px; background: #E7E2DA; overflow: hidden;
+  /* ============ INTRO (text left, angled photo right) ============ */
+  .intro2 { background: var(--white); padding: clamp(128px, 15vh, 176px) 0 clamp(66px, 9vw, 104px); overflow: hidden; }
+  .intro2-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(40px, 6vw, 96px); align-items: center; }
+  .intro2-lead {
+    font-family: var(--serif); font-weight: 700; color: var(--ink);
+    font-size: clamp(20px, 2.3vw, 28px); line-height: 1.34; letter-spacing: 0.002em;
   }
-  .head-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; z-index: 0; }
-  .head::before { display: none; }
-  .head-inner { position: relative; z-index: 2; }
-  .head .eyebrow { color: var(--gold); }
-  .head .eyebrow::before { background: var(--gold); }
-  .head-name {
-    font-family: var(--serif); font-weight: 700; color: var(--hero-ink);
-    font-size: clamp(36px, 6vw, 60px); line-height: 1.08; letter-spacing: 0.005em;
-  }
+  .intro2-lead .wave { margin-right: 0.14em; }
+
+  .photo-stack { position: relative; width: min(100%, 320px); margin: 0 auto; }
+  .photo-card { position: absolute; inset: 0; z-index: 0; background: var(--gold); border-radius: 18px; transform: rotate(3.2deg) translate(16px, 14px); will-change: transform; }
+  .photo { position: relative; z-index: 1; display: block; width: 100%; height: auto; border-radius: 18px; transform: rotate(-2deg); box-shadow: 0 26px 58px -26px rgba(31,27,20,0.5); will-change: transform; }
+
+  /* ============ MY STORY ============ */
+  #story { scroll-margin-top: 94px; }
+  .story { max-width: 72ch; }
+  .story p { color: var(--ink); font-size: clamp(17px, 1.25vw, 19px); line-height: 1.76; }
 
   /* ============ SECTIONS ============ */
   .band { padding: clamp(78px, 10vw, 128px) 0; }
@@ -120,15 +123,6 @@
   .section-head p { max-width: none; }
   .section-head h2 { font-family: var(--serif); font-weight: 700; color: var(--ink); font-size: clamp(26px, 3.4vw, 36px); line-height: 1.14; letter-spacing: -0.005em; }
   .section-head p { margin-top: 16px; color: var(--ink); font-size: 17px; }
-
-  /* intro: portrait + bio */
-  .intro { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(40px, 6vw, 84px); align-items: center; }
-  .intro-portrait { width: 100%; height: auto; }
-  .intro-body { border-left: 1.5px solid var(--case-rule); padding-left: clamp(22px, 2.2vw, 36px); }
-  .intro-body .eyebrow { margin-bottom: 16px; }
-  .intro-body h1 { font-family: var(--serif); font-weight: 700; color: var(--ink); font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; margin-bottom: 22px; }
-  .intro-body p { color: var(--ink); font-size: 17px; margin-bottom: 16px; max-width: 52ch; }
-  .intro-body p:last-child { margin-bottom: 0; }
 
   /* process steps */
   .steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(32px, 4vw, 54px); }
@@ -151,7 +145,7 @@
   /* contact close */
   .contact-band { text-align: center; }
   .contact-band h2 { font-family: var(--serif); font-weight: 700; color: var(--ink); font-size: clamp(28px, 4vw, 44px); line-height: 1.12; }
-  .contact-band p { color: var(--ink-2); font-size: 18px; margin: 18px auto 32px; max-width: 42ch; }
+  .contact-band p { color: var(--ink-2); font-size: 18px; margin: 18px auto 32px; max-width: none; }
   .contact-actions { display: inline-flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: center; }
   .ca-email {
     background: none; border: none; font: inherit; cursor: pointer; position: relative;
@@ -191,9 +185,11 @@
   /* responsive */
   @media (max-width: 860px) {
     body { font-size: 16px; }
-    .intro { grid-template-columns: 1fr; gap: 30px; }
-    .intro-portrait { max-width: 320px; }
-    .intro-body { border-left: none; padding-left: 0; }
+    .intro2 { padding-top: clamp(112px, 20vh, 150px); }
+    .intro2-grid { grid-template-columns: 1fr; gap: 38px; }
+    .intro2-copy { order: 1; }
+    .intro2-media { order: 2; }
+    .photo-stack { margin: 6px auto 0; }
     .steps { grid-template-columns: 1fr; gap: 30px; }
     .quotes { grid-template-columns: 1fr; gap: 34px; }
   }
@@ -227,27 +223,29 @@
   </div>
 </nav>
 
-<!-- HEADER -->
-<header class="head">
-  <img class="head-bg" src="assets/hero-bg.jpg" alt="" aria-hidden="true">
-  <div class="head-inner wrap reveal">
-    <div class="eyebrow">About</div>
-    <h1 class="head-name">Hi, I'm Liana.</h1>
-  </div>
-</header>
-
-<!-- INTRO: portrait + bio -->
-<section class="band band-white">
+<!-- INTRO: text left, angled photo right -->
+<section class="intro2">
   <div class="wrap">
-    <div class="intro reveal">
-      <img class="intro-portrait" src="assets/liana-portrait.jpg" alt="Portrait of Liana Rego">
-      <div class="intro-body">
-        <div class="eyebrow">Behind the portrait</div>
-        <h1>Nurse turned product designer.</h1>
-        <p>I'm a nurse-turned-product designer with over 5 years of design experience across fintech and healthcare.</p>
-        <p>I excel in designing in a fast-paced setting, learning new tools and skills quickly with a can-do attitude, and looking at problems with an astute attention to detail.</p>
-        <p>I care about craft — how clearly things communicate, handle edge cases, and build trust. Always in &ldquo;let me try this&rdquo; mode: curious, building, and exploring.</p>
+    <div class="intro2-grid">
+      <div class="intro2-copy reveal">
+        <p class="intro2-lead"><span class="wave" aria-hidden="true">&#128075;</span> Hi, I'm Liana, a designer with 5+ years of experience designing complex digital products. I'm best at translating messy requirements into clean, usable interfaces: meticulous by nature, empathetic by practice.</p>
       </div>
+      <div class="intro2-media reveal">
+        <div class="photo-stack">
+          <span class="photo-card" aria-hidden="true"></span>
+          <img class="photo" src="assets/liana-portrait.jpg?v=2" alt="Portrait of Liana Rego" width="900" height="1149">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY STORY -->
+<section class="band band-white" id="story">
+  <div class="wrap">
+    <div class="story reveal">
+      <div class="eyebrow">My story</div>
+      <p>I came to product design through nursing. Five years at the bedside taught me how to work inside complex systems where the stakes are real, such as how to hold many variables at once, how to move through multi-step protocols without missing a step, and how to listen to the person in front of me as the real source of truth. Those same instincts shape every project I ship. Today I design highly complex B2B platforms where the stakes are different but the discipline is the same.</p>
     </div>
   </div>
 </section>
@@ -355,7 +353,7 @@
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
     els.forEach(function (e) { io.observe(e); });
-    requestAnimationFrame(function () { document.querySelectorAll('.head .reveal').forEach(function (e) { e.classList.add('in'); }); });
+    requestAnimationFrame(function () { document.querySelectorAll('.intro2 .reveal').forEach(function (e) { e.classList.add('in'); }); });
   })();
 
   // Copy email (both the fixed one and the contact-close one)
@@ -371,6 +369,30 @@
     }
     wire(document.getElementById('copyEmail'));
     wire(document.getElementById('copyEmailBig'));
+  })();
+
+  // Scroll-linked tilt on the About photo (Rahul-style): the photo gently
+  // rotates as it moves through the viewport, with the card drifting behind it.
+  (function () {
+    var stack = document.querySelector('.photo-stack');
+    var photo = document.querySelector('.photo');
+    var card  = document.querySelector('.photo-card');
+    if (!stack || !photo || !card) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = stack.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var p = ((r.top + r.height / 2) - vh / 2) / (vh / 2); // + below center, - above
+      p = Math.max(-0.7, Math.min(0.3, p));
+      photo.style.transform = 'rotate(' + (-7 - p * 13).toFixed(2) + 'deg)';
+      card.style.transform  = 'rotate(' + (4 + p * 4).toFixed(2) + 'deg) translate(16px, ' + (14 - p * 10).toFixed(1) + 'px)';
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
   })();
 </script>
 </body>
