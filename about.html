@@ -371,23 +371,21 @@
     wire(document.getElementById('copyEmailBig'));
   })();
 
-  // Scroll-linked tilt on the About photo (Rahul-style): the photo gently
-  // rotates as it moves through the viewport, with the card drifting behind it.
+  // Scroll "shuffle" on the About photo (Rahul-style): as you scroll from the
+  // top, the photo rotates from a resting tilt through upright and the card
+  // slides/counter-rotates out from behind it. Tied to scroll progress so the
+  // resting tilt is consistent regardless of viewport height.
   (function () {
-    var stack = document.querySelector('.photo-stack');
     var photo = document.querySelector('.photo');
     var card  = document.querySelector('.photo-card');
-    if (!stack || !photo || !card) return;
+    if (!photo || !card) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var ticking = false;
     function update() {
       ticking = false;
-      var r = stack.getBoundingClientRect();
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-      var p = ((r.top + r.height / 2) - vh / 2) / (vh / 2); // + below center, - above
-      p = Math.max(-0.7, Math.min(0.3, p));
-      photo.style.transform = 'rotate(' + (-7 - p * 13).toFixed(2) + 'deg)';
-      card.style.transform  = 'rotate(' + (4 + p * 4).toFixed(2) + 'deg) translate(16px, ' + (14 - p * 10).toFixed(1) + 'px)';
+      var s = Math.max(0, Math.min(1, (window.scrollY || window.pageYOffset || 0) / 480));
+      photo.style.transform = 'rotate(' + (-4 + s * 8).toFixed(2) + 'deg)';
+      card.style.transform  = 'rotate(' + (5 - s * 9).toFixed(2) + 'deg) translate(' + (16 + s * 12).toFixed(1) + 'px, ' + (14 + s * 22).toFixed(1) + 'px)';
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
     window.addEventListener('scroll', onScroll, { passive: true });
