@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://lianarego.github.io/about.html">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cstyle%3Etext%7Bfill%3A%231F1B14%7D%40media%28prefers-color-scheme%3Adark%29%7Btext%7Bfill%3A%23F5EFE3%7D%7D%3C%2Fstyle%3E%3Ctext%20x%3D%2216.7%22%20y%3D%2223%22%20font-family%3D%22Georgia%2C%27Times%20New%20Roman%27%2Cserif%22%20font-weight%3D%22700%22%20font-size%3D%2221%22%20letter-spacing%3D%221.8%22%20text-anchor%3D%22middle%22%3ELR%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cstyle%3Etext%7Bfill%3A%231F1B14%7D%40media%28prefers-color-scheme%3Adark%29%7Btext%7Bfill%3A%23F5EFE3%7D%7D%3C%2Fstyle%3E%3Ctext%20x%3D%2216.8%22%20y%3D%2224.5%22%20font-family%3D%22Georgia%2C%27Times%20New%20Roman%27%2Cserif%22%20font-weight%3D%22700%22%20font-size%3D%2223%22%20letter-spacing%3D%221.6%22%20text-anchor%3D%22middle%22%3ELR%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,8 +107,17 @@
   .intro2-lead .wave { margin-right: 0.14em; }
 
   .photo-stack { position: relative; width: min(100%, 320px); margin: 0 auto; }
-  .photo-card { position: absolute; inset: 0; z-index: 0; background: var(--gold); border-radius: 18px; transform: rotate(3.2deg) translate(16px, 14px); will-change: transform; }
-  .photo { position: relative; z-index: 1; display: block; width: 100%; height: auto; border-radius: 18px; transform: rotate(-2deg); box-shadow: 0 26px 58px -26px rgba(31,27,20,0.5); will-change: transform; }
+  .photo-card { position: absolute; inset: 0; z-index: 0; background: var(--gold); border-radius: 18px; transform: rotate(4deg) translate(16px, 14px); animation: cardShuffle 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.24s both; }
+  .photo { position: relative; z-index: 1; display: block; width: 100%; height: auto; border-radius: 18px; transform: rotate(-2.5deg); box-shadow: 0 26px 58px -26px rgba(31,27,20,0.5); animation: photoShuffle 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both; }
+  /* On-load entrance: photo (opaque, no fade so the card never shows through it) slides up into place, then the gold card slides out from behind it. */
+  @keyframes photoShuffle {
+    from { transform: rotate(-2.5deg) translate(0, 16px); }
+    to   { transform: rotate(-2.5deg) translate(0, 0); }
+  }
+  @keyframes cardShuffle {
+    from { opacity: 0; transform: rotate(4deg) translate(4px, 20px); }
+    to   { opacity: 1; transform: rotate(4deg) translate(16px, 14px); }
+  }
 
   /* ============ MY STORY ============ */
   #story { scroll-margin-top: 94px; }
@@ -203,6 +212,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
+    .photo, .photo-card { animation: none; }
   }
 </style>
 </head>
@@ -230,7 +240,7 @@
       <div class="intro2-copy reveal">
         <p class="intro2-lead"><span class="wave" aria-hidden="true">&#128075;</span> Hi, I'm Liana, a designer with 5+ years of experience designing complex digital products. I'm best at translating messy requirements into clean, usable interfaces: meticulous by nature, empathetic by practice.</p>
       </div>
-      <div class="intro2-media reveal">
+      <div class="intro2-media">
         <div class="photo-stack">
           <span class="photo-card" aria-hidden="true"></span>
           <img class="photo" src="assets/liana-portrait.jpg?v=2" alt="Portrait of Liana Rego" width="900" height="1149">
@@ -369,28 +379,6 @@
     }
     wire(document.getElementById('copyEmail'));
     wire(document.getElementById('copyEmailBig'));
-  })();
-
-  // Scroll "shuffle" on the About photo (Rahul-style): as you scroll from the
-  // top, the photo rotates from a resting tilt through upright and the card
-  // slides/counter-rotates out from behind it. Tied to scroll progress so the
-  // resting tilt is consistent regardless of viewport height.
-  (function () {
-    var photo = document.querySelector('.photo');
-    var card  = document.querySelector('.photo-card');
-    if (!photo || !card) return;
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var ticking = false;
-    function update() {
-      ticking = false;
-      var s = Math.max(0, Math.min(1, (window.scrollY || window.pageYOffset || 0) / 480));
-      photo.style.transform = 'rotate(' + (-4 + s * 8).toFixed(2) + 'deg)';
-      card.style.transform  = 'rotate(' + (5 - s * 9).toFixed(2) + 'deg) translate(' + (16 + s * 12).toFixed(1) + 'px, ' + (14 + s * 22).toFixed(1) + 'px)';
-    }
-    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
   })();
 </script>
 </body>
