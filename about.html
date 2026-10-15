@@ -98,7 +98,7 @@
   body.scrolled .nav-links a:hover, body.scrolled .nav-links a.is-active { color: var(--gold); }
 
   /* ============ INTRO (text left, angled photo right) ============ */
-  .intro2 { background: var(--white); padding: clamp(128px, 15vh, 176px) 0 clamp(66px, 9vw, 104px); overflow: hidden; }
+  .intro2 { background: var(--white); padding: clamp(128px, 15vh, 176px) 0 clamp(36px, 4.5vw, 56px); overflow: hidden; }
   .intro2-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(40px, 6vw, 96px); align-items: center; }
   .intro2-lead {
     font-family: var(--serif); font-weight: 700; color: var(--ink);
@@ -121,9 +121,10 @@
   }
 
   /* ============ MY STORY ============ */
-  #story { scroll-margin-top: 94px; }
-  .story { max-width: 72ch; }
+  #story { scroll-margin-top: 94px; padding-top: clamp(32px, 4vw, 52px); }
+  .story { max-width: 784px; margin: 0 auto; }
   .story p { color: var(--ink); font-size: 17px; line-height: 1.76; }
+  .story p + p { margin-top: 18px; }
 
   /* ============ SECTIONS ============ */
   .band { padding: clamp(78px, 10vw, 128px) 0; }
@@ -259,6 +260,8 @@
     <div class="story reveal">
       <div class="eyebrow">My story</div>
       <p>I came to product design through nursing. Five years at the bedside taught me how to work inside complex systems where the stakes are real, such as how to hold many variables at once, how to move through multi-step protocols without missing a step, and how to listen to the person in front of me as the real source of truth. Those same instincts shape every project I ship. Today I design highly complex B2B platforms where the stakes are different but the discipline is the same.</p>
+      <p>For the past five years, I have been designing at Cencora, a Fortune 10 pharmaceutical distributor, where I lead design across two large B2B ordering platforms. My work spans regulated ordering, payments, self-service, and analytics dashboards.</p>
+      <p>What I care most about is workflow design under real conditions: dense interfaces that make sense and multi-step processes that feel intuitive and easy to use. I work closely with research, engineering, and product, and I contribute components back to the design system so good patterns compound across the enterprise.</p>
     </div>
   </div>
 </section>
